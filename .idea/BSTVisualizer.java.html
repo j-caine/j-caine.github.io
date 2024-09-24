@@ -1,0 +1,77 @@
+<html>
+<head>
+<title>BSTVisualizer.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #cf8e6d;}
+.s1 { color: #bcbec4;}
+.s2 { color: #bcbec4;}
+.s3 { color: #2aacb8;}
+.s4 { color: #7a7e85;}
+</style>
+</head>
+<body bgcolor="#1e1f22">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+BSTVisualizer.java</font>
+</center></td></tr></table>
+<pre><span class="s0">import </span><span class="s1">javax</span><span class="s2">.</span><span class="s1">swing</span><span class="s2">.*;</span>
+<span class="s0">import </span><span class="s1">java</span><span class="s2">.</span><span class="s1">awt</span><span class="s2">.*;</span>
+
+<span class="s0">public class </span><span class="s1">BSTVisualizer </span><span class="s0">extends </span><span class="s1">JPanel </span><span class="s2">{</span>
+
+    <span class="s1">BinarySearchTree bst</span><span class="s2">;</span>
+
+    <span class="s0">public </span><span class="s1">BSTVisualizer</span><span class="s2">(</span><span class="s1">BinarySearchTree bst</span><span class="s2">) {</span>
+        <span class="s0">this</span><span class="s2">.</span><span class="s1">bst </span><span class="s2">= </span><span class="s1">bst</span><span class="s2">;</span>
+    <span class="s2">}</span>
+
+    <span class="s0">protected void </span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">Graphics g</span><span class="s2">) {</span>
+        <span class="s0">super</span><span class="s2">.</span><span class="s1">paintComponent</span><span class="s2">(</span><span class="s1">g</span><span class="s2">);</span>
+        <span class="s1">drawTree</span><span class="s2">(</span><span class="s1">g</span><span class="s2">, </span><span class="s1">getWidth</span><span class="s2">() / </span><span class="s3">2</span><span class="s2">, </span><span class="s3">30</span><span class="s2">, </span><span class="s1">bst</span><span class="s2">.</span><span class="s1">root</span><span class="s2">, </span><span class="s1">getWidth</span><span class="s2">() / </span><span class="s3">4</span><span class="s2">);</span>
+    <span class="s2">}</span>
+
+    <span class="s0">private void </span><span class="s1">drawTree</span><span class="s2">(</span><span class="s1">Graphics g</span><span class="s2">, </span><span class="s0">int </span><span class="s1">x</span><span class="s2">, </span><span class="s0">int </span><span class="s1">y</span><span class="s2">, </span><span class="s1">Node node</span><span class="s2">, </span><span class="s0">int </span><span class="s1">xOffset</span><span class="s2">) {</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">node </span><span class="s2">== </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s0">return</span><span class="s2">;</span>
+        <span class="s2">}</span>
+
+        <span class="s4">// Draw node (oval)</span>
+        <span class="s1">g</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">nodeRadius </span><span class="s2">= </span><span class="s3">30</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">ovalX </span><span class="s2">= </span><span class="s1">x </span><span class="s2">- </span><span class="s1">nodeRadius </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">;</span>
+        <span class="s0">int </span><span class="s1">ovalY </span><span class="s2">= </span><span class="s1">y </span><span class="s2">- </span><span class="s1">nodeRadius </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">;</span>
+        <span class="s1">g</span><span class="s2">.</span><span class="s1">drawOval</span><span class="s2">(</span><span class="s1">ovalX</span><span class="s2">, </span><span class="s1">ovalY</span><span class="s2">, </span><span class="s1">nodeRadius</span><span class="s2">, </span><span class="s1">nodeRadius</span><span class="s2">);</span>
+
+        <span class="s4">// Draw centered text in the oval</span>
+        <span class="s1">FontMetrics fm </span><span class="s2">= </span><span class="s1">g</span><span class="s2">.</span><span class="s1">getFontMetrics</span><span class="s2">();</span>
+        <span class="s1">String nodeValue </span><span class="s2">= </span><span class="s1">Integer</span><span class="s2">.</span><span class="s1">toString</span><span class="s2">(</span><span class="s1">node</span><span class="s2">.</span><span class="s1">data</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">textWidth </span><span class="s2">= </span><span class="s1">fm</span><span class="s2">.</span><span class="s1">stringWidth</span><span class="s2">(</span><span class="s1">nodeValue</span><span class="s2">);</span>
+        <span class="s0">int </span><span class="s1">textHeight </span><span class="s2">= </span><span class="s1">fm</span><span class="s2">.</span><span class="s1">getAscent</span><span class="s2">();</span>
+        <span class="s1">g</span><span class="s2">.</span><span class="s1">drawString</span><span class="s2">(</span><span class="s1">nodeValue</span><span class="s2">, </span><span class="s1">x </span><span class="s2">- </span><span class="s1">textWidth </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">, </span><span class="s1">y </span><span class="s2">+ </span><span class="s1">textHeight </span><span class="s2">/ </span><span class="s3">4</span><span class="s2">);</span>
+
+        <span class="s4">// Draw lines to children</span>
+        <span class="s0">int </span><span class="s1">lineY </span><span class="s2">= </span><span class="s1">y </span><span class="s2">+ </span><span class="s1">nodeRadius </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">; </span><span class="s4">// Start of line from the bottom of the oval</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">node</span><span class="s2">.</span><span class="s1">left </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s0">int </span><span class="s1">childX </span><span class="s2">= </span><span class="s1">x </span><span class="s2">- </span><span class="s1">xOffset</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">childY </span><span class="s2">= </span><span class="s1">y </span><span class="s2">+ </span><span class="s3">60</span><span class="s2">; </span><span class="s4">// Adjust distance between levels</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">);</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">drawLine</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">lineY</span><span class="s2">, </span><span class="s1">childX</span><span class="s2">, </span><span class="s1">childY </span><span class="s2">- </span><span class="s1">nodeRadius </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">); </span><span class="s4">// Line connects to the top of the child oval</span>
+            <span class="s1">drawTree</span><span class="s2">(</span><span class="s1">g</span><span class="s2">, </span><span class="s1">childX</span><span class="s2">, </span><span class="s1">childY</span><span class="s2">, </span><span class="s1">node</span><span class="s2">.</span><span class="s1">left</span><span class="s2">, </span><span class="s1">xOffset </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">);</span>
+        <span class="s2">}</span>
+
+        <span class="s0">if </span><span class="s2">(</span><span class="s1">node</span><span class="s2">.</span><span class="s1">right </span><span class="s2">!= </span><span class="s0">null</span><span class="s2">) {</span>
+            <span class="s0">int </span><span class="s1">childX </span><span class="s2">= </span><span class="s1">x </span><span class="s2">+ </span><span class="s1">xOffset</span><span class="s2">;</span>
+            <span class="s0">int </span><span class="s1">childY </span><span class="s2">= </span><span class="s1">y </span><span class="s2">+ </span><span class="s3">60</span><span class="s2">; </span><span class="s4">// Adjust distance between levels</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">setColor</span><span class="s2">(</span><span class="s1">Color</span><span class="s2">.</span><span class="s1">BLACK</span><span class="s2">);</span>
+            <span class="s1">g</span><span class="s2">.</span><span class="s1">drawLine</span><span class="s2">(</span><span class="s1">x</span><span class="s2">, </span><span class="s1">lineY</span><span class="s2">, </span><span class="s1">childX</span><span class="s2">, </span><span class="s1">childY </span><span class="s2">- </span><span class="s1">nodeRadius </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">); </span><span class="s4">// Line connects to the top of the child oval</span>
+            <span class="s1">drawTree</span><span class="s2">(</span><span class="s1">g</span><span class="s2">, </span><span class="s1">childX</span><span class="s2">, </span><span class="s1">childY</span><span class="s2">, </span><span class="s1">node</span><span class="s2">.</span><span class="s1">right</span><span class="s2">, </span><span class="s1">xOffset </span><span class="s2">/ </span><span class="s3">2</span><span class="s2">);</span>
+        <span class="s2">}</span>
+    <span class="s2">}</span>
+<span class="s2">}</span>
+</pre>
+</body>
+</html>
